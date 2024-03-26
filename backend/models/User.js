@@ -25,8 +25,10 @@ const UserSchema = new Schema({
    //     default:true 
    //  }
   
-
-  
 });
 
-module.exports = mongoose.model('user' ,  UserSchema )
+//ye niche ki line change krne pr data uniw=que jana chaiye tha par ab same jaa rha hai  and auth wale me user.create bhi daala hai 
+
+const User = mongoose.model('user', UserSchema )
+User.createIndexes();
+module.exports = User
