@@ -27,7 +27,7 @@ const UserSchema = new Schema({
   
 });
 
-//ye niche ki line change krne pr data uniw=que jana chaiye tha par ab same jaa rha hai  and auth wale me user.create bhi daala hai 
+//ye niche ki line change krne pr data unique jana chaiye tha par ab same jaa rha hai  and auth wale me user.create bhi daala hai 
 
 const User = mongoose.model('user', UserSchema )
 // User.createIndexes();
