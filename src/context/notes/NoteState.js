@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NoteContext from './NoteContext';
 
 const NoteState = (props) => {
-    const s1 = {
+      const s1 = {
         "name": "Harry",
         "class": "5b"
     }
@@ -11,13 +11,13 @@ const NoteState = (props) => {
     const update = () => {
         setTimeout(() => {
             setState({
-                "name": "Harry",
+                "name": "Larry",
                 "class": "3b"
             })
         }, 1000);
     }
     return (
-        <NoteContext.Provider value={{state,update}}>
+        <NoteContext.Provider value={{state , update }}>
             {props.children}
         </NoteContext.Provider>
     )
