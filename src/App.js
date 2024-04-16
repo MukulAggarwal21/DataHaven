@@ -16,20 +16,20 @@ function App() {
     <>
       <div>
         {/* <Router> */}
-          <NoteState>
-            <Router>
+        <NoteState>
+          <Router>
             <Navbar />
             <Alert message="This is amazing Notes Cloud" />
             <div className="container">
-            <Routes>
-              <Route exact path="/about" element={<About />}>
-              </Route>
-              <Route exact path="/" element={<Home />}>
-              </Route>
-            </Routes>
+              <Routes>
+                <Route exact path="/about" element={<About />}>
+                </Route>
+                <Route exact path="/" element={<Home />}>
+                </Route>
+              </Routes>
             </div>
-            </Router>
-          </NoteState>
+          </Router>
+        </NoteState>
         {/* </Router> */}
 
       </div>
