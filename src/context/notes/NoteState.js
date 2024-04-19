@@ -41,21 +41,9 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag })  // body data type must match "Content-Type" header
     });
-    const json = response.json(); // parses JSON response into native JavaScript objects
-
-
+    const note = await response.json(); // parses JSON response into native JavaScript objects
+    setNotes(notes.concat(note))    //Here we use concact instead of push bcoz  using concat a new array is returned
     console.log("Adding a new Note")
-    const note = {
-      "_id": "6uj61062f45dacf724dbd4a6e6d",
-      "user": "660db12a130254e8344de448",
-      "title": title,
-      "description": description,
-      "tag": tag,
-      "date": "2024-04-05T20:45:40.782Z",
-      "__v": 0
-    }
-    //Here we use concact instead of push bcoz  using concat a new array is returned
-    setNotes(notes.concat(note))
   }
 
   //Delete a Note
@@ -68,9 +56,9 @@ const NoteState = (props) => {
         // 'Content-Type': 'application/x-www-form-urlencoded',
         "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjYwZGIxMmExMzAyNTRlODM0NGRlNDQ4In0sImlhdCI6MTcxMjM0MDA5NH0.pqmcWsH7JvDDq4PcXestYrWyaBIz6bk9Z9LF8QSvjK0"
       },
-     
+
     });
-    const json = response.json(); // parses JSON response into native JavaScript objects
+    const json = await response.json(); // parses JSON response into native JavaScript objects
     console.log(json)
 
 
@@ -85,26 +73,30 @@ const NoteState = (props) => {
     //API CALL
     //In fetch we have written the URL
     const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      method:'PUT', // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjYwZGIxMmExMzAyNTRlODM0NGRlNDQ4In0sImlhdCI6MTcxMjM0MDA5NH0.pqmcWsH7JvDDq4PcXestYrWyaBIz6bk9Z9LF8QSvjK0"
+        "auth-token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjYwZGIxMmExMzAyNTRlODM0NGRlNDQ4In0sImlhdCI6MTcxMjM0MDA5NH0.pqmcWsH7JvDDq4PcXestYrWyaBIz6bk9Z9LF8QSvjK0",
       },
       body: JSON.stringify({ title, description, tag })  // body data type must match "Content-Type" header
     });
-    const json = response.json(); // parses JSON response into native JavaScript objects
+    const json = await response.json(); // parses JSON response into native JavaScript objects
+    console.log(json);
 
-
+    let newNotes = JSON.parse(JSON.stringify(notes))
     //Logic to edit in call
-    for (let index = 0; index < notes.length; index++) {
-      const element = notes[index];
+    for (let index = 0; index < newNotes.length; index++) {
+      const element = newNotes[index];
       if (element._id === id) {
-        element.title = title;
-        element.description = description;
-        element.tag = tag;
+        newNotes[index].title = title;
+        newNotes[index].description = description;
+        newNotes[index].tag = tag;
+        break;
       }
+
     }
+    setNotes(newNotes);
   }
 
   return (
