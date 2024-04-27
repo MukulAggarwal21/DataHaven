@@ -14,6 +14,7 @@ router.post('/CreateUser', [
     body('email', ' Enter a valid Email').isEmail(),
     body('password', ' Enter a valid Password').isLength({ min: 5 }),
 ], async (req, res) => {
+     const success = false; 
     //If there are error , return bad request and the errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -58,6 +59,7 @@ router.post('/login', [
     body('password', ' Password can not be blankn').exists(),
 
 ], async (req, res) => {
+    let  success = false;
     //If there are error , return bad request and the errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -69,13 +71,15 @@ router.post('/login', [
         let user = await User.findOne({ email });
 
         if (!user) {
+            success = false
             return res.status(400).json({ error: "Please try to login with correct credentials" })
         }
 
 
         const passwordCompare = await bcrypt.compare(password, user.password);
         if (!passwordCompare) {
-            return res.status(400).json({ error: "Please try to login with correct credentials" })
+            success = false
+            return res.status(400).json({ success, error: "Please try to login with correct credentials" })
         }
 
         //payload me data transfer if password compare
@@ -85,7 +89,8 @@ router.post('/login', [
             }
         }
         const authtoken = jwt.sign(data, JWT_SECRET);
-        res.json({ authtoken })
+        success = true;
+        res.json({ success, authtoken })
 
     } catch (error) {
         console.error(error.message);
@@ -96,18 +101,18 @@ router.post('/login', [
 
 
 // Route 3: Get loggesin User  Detail using  : POST "/api/auth/getuser". Login required
-router.post('/getuser', fetchuser ,  async (req, res) => {
+router.post('/getuser', fetchuser, async (req, res) => {
     try {
-         const userId = req.user.id;
+        const userId = req.user.id;
         // This means that select everything except the password from user Id
-         const user = await User.findById(userId).select("-password");
+        const user = await User.findById(userId).select("-password");
         res.send(user)
 
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server ERROR");
     }
-    
+
 })
 
 module.exports = router

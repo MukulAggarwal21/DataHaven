@@ -1,8 +1,6 @@
 import React from 'react'
 import noteContext from "../context/notes/NoteContext"
-
 import { useContext, useState } from "react";
-
 
 const AddNote = () => {
     const context = useContext(noteContext);
@@ -21,6 +19,7 @@ const AddNote = () => {
         setNote({ ...note, [e.target.name]: e.target.value })
     }
     return (
+        
         <div>
             <div className="container my-3">
                 <h2>Add a Note</h2>
