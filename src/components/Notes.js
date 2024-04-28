@@ -2,13 +2,20 @@ import React, { useEffect, useRef, useContext, useState } from 'react'
 import noteContext from "../context/notes/NoteContext"
 import Noteitem from './Noteitem';
 import AddNote from './AddNote';
+import { useNavigate } from 'react-router-dom';
 
 
 const Notes = (props) => {
     const context = useContext(noteContext);
+    let history = useNavigate();
     const { notes, getNotes, editNote } = context;
     useEffect(() => {
-        getNotes()
+        if (localStorage.getItem('token')) {
+            getNotes();
+        }
+        else {
+            history.push("/login")
+        }
         // eslint-disable-next-line
     }, [])
 
@@ -23,7 +30,7 @@ const Notes = (props) => {
         // Js to use Modal
         ref.current.click();
         setNote({ id: currentNote._id, etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag })
- 
+
     }
 
     const handleClick = (e) => {

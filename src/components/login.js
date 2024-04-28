@@ -21,12 +21,11 @@ const Login = (props) => {
         if (json.success) {
             //save the auth token and useNavigate 
             localStorage.setItem('token', json.authtoken);
+            props.showAlert("Logged in  Successfully", "success");
             history.push("/");
-            props.showAlert("Logged in  Successfully", "success")
-
         }
         else {
-      props.showAlert("Invalid Details", "danger")
+            props.showAlert("Invalid Details", "danger")
         }
     }
 
@@ -37,7 +36,8 @@ const Login = (props) => {
     }
 
     return (
-        <div>
+        <div className='mt-3'>
+        <h2>Login to continue to iNotebook</h2>
             <form onSubmit={handleSumit}>
                 <div className="form-group">
                     <label htmlFor="email">Email address</label>
