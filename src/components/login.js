@@ -1,4 +1,4 @@
-import React , { useState } from 'react'
+import React, { useState } from 'react'
 //REMEMBER INSTEAD OF USEHISTORY , NOWADAYS REACT-ROUTER-DOM SUPPORTS useNavigate
 import { useNavigate } from 'react-router-dom';
 
@@ -21,10 +21,12 @@ const Login = (props) => {
         if (json.success) {
             //save the auth token and useNavigate 
             localStorage.setItem('token', json.authtoken);
-            history.push("/")
+            history.push("/");
+            props.showAlert("Logged in  Successfully", "success")
+
         }
         else {
-            alert("Invalid Credentials ")
+      props.showAlert("Invalid Details", "danger")
         }
     }
 
@@ -58,7 +60,7 @@ export default Login
 
 
 
-// by chatgpt 
+// by chatgpt
 // import React, { useState } from 'react';
 // import { useNavigate } from "react-router-dom";
 
@@ -79,7 +81,7 @@ export default Login
 //         const json = await response.json();
 //         console.log(json);
 //         if (json.success) {
-//             //save the auth token and useNavigate 
+//             //save the auth token and useNavigate
 //             localStorage.setItem('token', json.authtoken);
 //             history.push("/");
 //         } else {
@@ -88,8 +90,8 @@ export default Login
 //     };
 
 //     const onChange = (e) => {
-//         // In this, we did that whatever is the old note should be there and whatever you write should be overwritten or added to it. 
-//         //  [e.target.name]: e.target.value  :: This means that the name of whatever is changing becomes equal to its value. 
+//         // In this, we did that whatever is the old note should be there and whatever you write should be overwritten or added to it.
+//         //  [e.target.name]: e.target.value  :: This means that the name of whatever is changing becomes equal to its value.
 //         setCredentials({ ...credentials, [e.target.name]: e.target.value });
 //     };
 
