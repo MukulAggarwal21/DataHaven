@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = (props) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" })
-    let history = useNavigate();
+    let navigate = useNavigate();
 
     const handleSumit = async (e) => {
         e.preventDefault();
@@ -22,7 +22,7 @@ const Login = (props) => {
             //save the auth token and useNavigate 
             localStorage.setItem('token', json.authtoken);
             props.showAlert("Logged in  Successfully", "success");
-            history.push("/");
+            navigate("/");
         }
         else {
             props.showAlert("Invalid Details", "danger")
@@ -41,7 +41,7 @@ const Login = (props) => {
             <form onSubmit={handleSumit}>
                 <div className="form-group">
                     <label htmlFor="email">Email address</label>
-                    <input type="email" className="form-control" value={credentials.email} onChange={onchange} id="email" aria-describedby="emailHelp" placeholder="Enter email" />
+                    <input type="email" className="form-control" value={credentials.email} onChange={onchange} name='email' id="email" aria-describedby="emailHelp" placeholder="Enter email" />
                     <div id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</div>
                 </div>
                 <div className="form-group">
@@ -49,7 +49,7 @@ const Login = (props) => {
                     <input type="password" className="form-control" value={credentials.password} onChange={onchange} name="password" id="password" placeholder="Password" />
                 </div>
 
-                <button type="submit" className="btn btn-primary" >Submit</button>
+                <button type="submit" className="btn btn-primary my-3" >Submit</button>
             </form>
         </div>
     )

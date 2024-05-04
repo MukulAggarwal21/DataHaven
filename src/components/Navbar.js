@@ -5,10 +5,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 
 const Navbar = () => {
-    let history = useNavigate();
+    let navigate = useNavigate();
     const handleLogout = () =>{
         localStorage.removeItem('token');
-        history.push('/login');
+        navigate('/login');
     }
     let location = useLocation();
     return (
