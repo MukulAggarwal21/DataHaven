@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const Signup = (props) => {
+  const host = "http://localhost:5000"
   const [credentials, setCredentials] = useState({ name: " ", email: "", password: "", cpassword: "" })
   const navigate = useNavigate();
 
-  const handleSumit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     //destructing use heere
     const { name, email, password } = credentials;
     // fetch()
-    const response = await fetch("http://localhost:5000/api/auth/CreateUser", {
+    const response = await fetch(`${host}/api/auth/CreateUser`, {
 
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
@@ -43,7 +44,7 @@ const Signup = (props) => {
   return (
    <div className=' container mt-2'>
         <h2>Create an Account to use iNotebook</h2>
-      <form onSubmit={handleSumit}>
+      <form onSubmit={handleSubmit}>
         <div className="my-3">
           <label htmlFor="name" className="form-label">Name</label>
           <input type="text" className="form-control" id="name" name='name' onChange={onChange} />
@@ -62,7 +63,7 @@ const Signup = (props) => {
           <input type="password" className="form-control" id="cpassword" name='cpassword' onChange={onChange} minLength={5} required />
         </div>
 
-        <button type="submit" className="btn btn-primary" onClick={handleSumit}>Submit</button>
+        <button type="submit" className="btn btn-primary" >Submit</button>
       </form>
 
     </div>

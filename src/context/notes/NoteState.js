@@ -3,9 +3,10 @@ import NoteContext from './NoteContext';
 
 
 const NoteState = (props) => {
-  const host = "http://localhost:5000"
+  const host = "http://localhost:3000"
   const notesInitial = []
   const [notes, setNotes] = useState(notesInitial)
+
 
 
   //Get All  Note
@@ -45,6 +46,8 @@ const NoteState = (props) => {
     console.log("Adding a new Note")
   }
 
+
+  
   //Delete a Note
   const deleteNote = async (id) => {
     //API CALL
